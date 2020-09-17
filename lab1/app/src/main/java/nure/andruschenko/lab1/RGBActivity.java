@@ -4,13 +4,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
+import androidx.appcompat.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class RGBActivity extends AppCompatActivity {
     View colorView;
     private SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -50,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
         redSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
         blueSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
         greenSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+
+        Toolbar menu = findViewById(R.id.toolbar);
+        menu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return Commons.onOptionsItemSelected(item, RGBActivity.this);
+            }
+        });
     }
-
-
 }

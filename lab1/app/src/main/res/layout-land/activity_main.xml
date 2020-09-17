@@ -5,56 +5,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:hapticFeedbackEnabled="true"
-    tools:context=".MainActivity">
+    tools:context=".RGBActivity">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="514dp"
-        android:layout_height="413dp"
-        android:background="#AFAFAF"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/activities_menu"
+        app:title="@string/rgb_activity" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="215dp"
-        android:layout_height="413dp"
-        app:layout_constraintStart_toEndOf="@+id/view"
-        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <SeekBar
-            android:id="@+id/redColorSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:layout_marginTop="32dp"
-            android:max="255"
-            android:progress="255"
-            android:progressTint="#F44336"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#AFAFAF" />
 
-        <SeekBar
-            android:id="@+id/blueSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:layout_marginTop="32dp"
-            android:max="255"
-            android:progress="255"
-            android:progressTint="#3F51B5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/redColorSeekBar" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <SeekBar
-            android:id="@+id/greenSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:layout_marginTop="32dp"
-            android:hapticFeedbackEnabled="true"
-            android:max="255"
-            android:progress="255"
-            android:progressTint="#4CAF50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/blueSeekBar" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <SeekBar
+                    android:id="@+id/redColorSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_weight="1"
+                    android:max="255"
+                    android:progress="255"
+                    android:progressTint="#F44336" />
+
+                <SeekBar
+                    android:id="@+id/blueSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_weight="1"
+                    android:max="255"
+                    android:progress="255"
+                    android:progressTint="#3F51B5" />
+
+                <SeekBar
+                    android:id="@+id/greenSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_weight="1"
+                    android:hapticFeedbackEnabled="true"
+                    android:max="255"
+                    android:progress="255"
+                    android:progressTint="#4CAF50" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

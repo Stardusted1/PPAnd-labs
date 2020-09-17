@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">lab1</string>
     <string name="switcher">eng</string>
+    <string name="calc_value">enter expression</string>
+    <string name="calc_result">Get result</string>
+    <string name="calc_activity" >Calc</string>
+    <string name="rgb_activity">RGB</string>
+    <string name="notes_activity">Notes</string>
 </resources>

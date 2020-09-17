@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">lab1</string>
     <string name="switcher">ru</string>
+    <string name="calc_activity" >Калькулятор</string>
+    <string name="calc_value">ведіть приклад</string>
+    <string name="calc_result">отримай результат</string>
+    <string name="rgb_activity">"RGB "</string>
+    <string name="notes_activity">Нотатки</string>
 </resources>

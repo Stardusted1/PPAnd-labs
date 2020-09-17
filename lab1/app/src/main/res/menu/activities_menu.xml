@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/calc_menu"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="@string/calc_activity" />
+    <item
+        android:id="@+id/rgb_menu"
+        android:title="@string/rgb_activity" />
+    <item
+        android:id="@+id/notes_menu"
+        android:title="@string/notes_activity" />
+</menu>
