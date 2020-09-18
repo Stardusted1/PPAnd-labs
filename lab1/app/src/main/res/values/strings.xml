@@ -6,4 +6,7 @@
     <string name="calc_activity" >Calc</string>
     <string name="rgb_activity">RGB</string>
     <string name="notes_activity">Notes</string>
+    <string name="search_label">Search here</string>
+    <string name="search_hint">"Search here "</string>
+    <string name="notes_add_note">Add note</string>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/app_bar_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView">
+
+    </item>
+    <item
+        android:onClick="onActionCreate"
+        android:title="@string/notes_add_note" />
+    <item
+        android:id="@+id/calc_menu"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="@string/calc_activity" />
+    <item
+        android:id="@+id/rgb_menu"
+        android:title="@string/rgb_activity" />
+</menu>
