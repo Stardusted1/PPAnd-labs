@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">lab1</string>
-    <string name="switcher">ru</string>
-    <string name="calc_activity" >Калькулятор</string>
+    <string name="switcher">ua</string>
     <string name="calc_value">ведіть приклад</string>
     <string name="calc_result">отримай результат</string>
+    <string name="calc_activity">Калькулятор</string>
     <string name="rgb_activity">"RGB "</string>
     <string name="notes_activity">Нотатки</string>
+    <string name="search_label">"Шукати тута "</string>
+    <string name="search_hint">"Шукати тута "</string>
+    <string name="notes_add_note">додати нотатку</string>
 </resources>
