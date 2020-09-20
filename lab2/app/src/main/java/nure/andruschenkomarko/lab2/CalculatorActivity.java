@@ -1,4 +1,4 @@
-package nure.andruschenko.lab1;
+package nure.andruschenkomarko.lab2;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,7 +27,6 @@ public class CalculatorActivity extends AppCompatActivity {
         Toolbar menu = findViewById(R.id.toolbar2);
         input = findViewById(R.id.input);
         result = findViewById(R.id.result);
-
         menu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -51,7 +50,7 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     public void addValue(View view) {
-        if(!result.getText().equals("0.0")){
+        if (!result.getText().equals("0.0")) {
             clearValue(view);
         }
         AppCompatButton b = (AppCompatButton) view;
@@ -115,5 +114,9 @@ public class CalculatorActivity extends AppCompatActivity {
         }
         result.setText(String.valueOf(res));
         result.invalidate();
+    }
+
+    public void restoreState() {
+
     }
 }

@@ -1,4 +1,4 @@
-package nure.andruschenko.lab1;
+package nure.andruschenkomarko.lab2;
 
 import android.app.ListActivity;
 import android.app.SearchManager;

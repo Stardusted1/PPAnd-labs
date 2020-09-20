@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nure.andruschenko.lab1">
+    package="nure.andruschenkomarko.lab2">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -35,13 +35,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalculatorActivity">
+        <activity
+            android:name=".CalculatorActivity"
+            android:configChanges="orientation|screenSize">
 
         </activity>
         <activity android:name=".NotesActivity">
 
         </activity>
-        <activity android:name="nure.andruschenko.lab1.SearchActivity">
+        <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

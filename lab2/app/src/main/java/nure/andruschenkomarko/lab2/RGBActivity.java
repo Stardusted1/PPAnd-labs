@@ -1,19 +1,16 @@
-package nure.andruschenko.lab1;
+package nure.andruschenkomarko.lab2;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
-import androidx.appcompat.widget.Toolbar;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class RGBActivity extends AppCompatActivity {
     View colorView;

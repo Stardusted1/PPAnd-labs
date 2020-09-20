@@ -1,4 +1,4 @@
-package nure.andruschenko.lab1;
+package nure.andruschenkomarko.lab2;
 
 import android.content.Context;
 import android.content.Intent;
