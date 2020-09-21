@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">lab1</string>
+    <string name="app_name">lab2</string>
     <string name="switcher">ua</string>
     <string name="calc_value">ведіть приклад</string>
     <string name="calc_result">отримай результат</string>
