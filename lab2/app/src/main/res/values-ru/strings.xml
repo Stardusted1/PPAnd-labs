@@ -6,5 +6,8 @@
     <string name="calc_value">ведіть приклад</string>
     <string name="calc_result">отримай результат</string>
     <string name="rgb_activity">"RGB "</string>
-    <string name="notes_activity">Нотатки</string>
+    <string name="notes_activity">Andrushchenko Lab 3</string>
+    <string name="notes_add_note">дабивить заметку</string>
+    <string name="search_hint" translatable="false">искать тут</string>
+    <string name="search_label" translatable="false">искать тут</string>
 </resources>

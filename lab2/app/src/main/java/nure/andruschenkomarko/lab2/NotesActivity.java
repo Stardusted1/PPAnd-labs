@@ -1,17 +1,19 @@
 package nure.andruschenkomarko.lab2;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.appcompat.widget.Toolbar;
 
 public class NotesActivity extends AppCompatActivity {
+
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +27,23 @@ public class NotesActivity extends AppCompatActivity {
                     return Commons.onOptionsItemSelected(item, NotesActivity.this);
                 }
             });
+            searchView.setOnQueryTextListener(new OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    System.out.println(s);
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    System.out.println(newText);
+                    return false;
+                }
+            });
         } catch (Exception e) {
             System.out.println("was exception");
         }
+
     }
 
     @Override
@@ -35,15 +51,28 @@ public class NotesActivity extends AppCompatActivity {
         // Inflate the options menu from XML
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.notes_menu, menu);
+        searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(new OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                System.out.println(s);
+                return true;
+            }
 
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.notes_menu).getActionView();
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                System.out.println(newText);
+                return false;
+            }
+        });
 
         return true;
+    }
+
+    public void Search(View view) {
+        System.out.println("search");
+        onSearchRequested();
     }
 
     public void onActionCreate(MenuItem item) {
