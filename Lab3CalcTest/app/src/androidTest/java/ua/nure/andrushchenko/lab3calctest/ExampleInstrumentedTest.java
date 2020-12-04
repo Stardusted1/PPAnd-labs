@@ -1,31 +1,26 @@
 package ua.nure.andrushchenko.lab3calctest;
 
-import android.content.Context;
 
-import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.espresso.Espresso;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import junit.extensions.ActiveTestSuite;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Rule
-    public ActiveTestRule<CalculatorActivity> rule = new ActiveTestRule(CalculatorActivity.class);
+    public ActivityScenarioRule<CalculatorActivity> rule = new ActivityScenarioRule<>(CalculatorActivity.class);
+
     @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("ua.nure.andrushchenko.lab3calctest", appContext.getPackageName());
+    public void isRightActivity() {
+        Espresso.onView(ViewMatchers.withText("Lab3CalcTest")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText("1").)
     }
 }
