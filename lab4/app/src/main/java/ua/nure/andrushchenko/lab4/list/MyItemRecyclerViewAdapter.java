@@ -2,6 +2,7 @@ package ua.nure.andrushchenko.lab4.list;
 
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ua.nure.andrushchenko.lab4.R;
-import ua.nure.andrushchenko.lab4.dummy.DummyContent.DummyItem;
 import ua.nure.andrushchenko.lab4.service.Note;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<Note> mValues;
@@ -43,13 +39,21 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mItem = mValues.get(position);
         holder.note_title.setText(mValues.get(position).getTitle());
         holder.note_desc.setText(mValues.get(position).getDesc());
-        if (Bitmap.createBitmap(mValues.get(position).getImage()) != null) {
-            holder.note_image.setImageBitmap(Bitmap.createBitmap(mValues.get(position).getImage()));
+        if (mValues.get(position).getPicture() != null) {
+            holder.note_image.setImageBitmap(Bitmap.createBitmap(mValues.get(position).getPicture()));
         } else {
-            holder.note_image
+            holder.note_image.setImageResource(R.drawable.ic_launcher_background);
         }
-        holder.note_date.setText(mValues.get(position).getDate().toString());
-        holder.note_importance.setImageResource(R.mipmap.ic_launcher);
+        DateFormat.format("yyyy-MM-dd hh:mm:ss a", mValues.get(position).getDate());
+        holder.note_date.setText(DateFormat.format("yyyy-MM-dd hh:mm:ss a", mValues.get(position).getDate()));
+
+        if (mValues.get(position).getImportance() == 0) {
+            holder.note_importance.setImageResource(R.drawable.level1);
+        } else if (mValues.get(position).getImportance() == 1) {
+            holder.note_importance.setImageResource(R.drawable.level2);
+        } else if (mValues.get(position).getImportance() == 2) {
+            holder.note_importance.setImageResource(R.drawable.level3);
+        }
     }
 
     @Override

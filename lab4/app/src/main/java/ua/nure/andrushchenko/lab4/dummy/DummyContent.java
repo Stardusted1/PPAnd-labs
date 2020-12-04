@@ -1,11 +1,10 @@
 package ua.nure.andrushchenko.lab4.dummy;
 
-import android.graphics.Picture;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import ua.nure.andrushchenko.lab4.service.Note;
 
@@ -18,7 +17,7 @@ public class DummyContent {
 
     static {
         for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
+            addItem(createDummyItem(String.format("item %s", i)));
         }
     }
 
@@ -27,8 +26,10 @@ public class DummyContent {
         ITEM_MAP.put(item.getId(), item);
     }
 
-    private static Note createDummyItem(String title, String desc, Picture picture) {
-        return new Note(ITEMS.size(), title, desc, picture);
+    private static Note createDummyItem(String title) {
+        Note note = new Note(ITEMS.size(), title, "sdjfksdjhfj hsf bskjfksd jksdj skdhf kjdshf kjhdsfk jsd kjsh kjsdh jshd jksdh jsdh kjsdhf shsjkdkfjhsdfjkhsdfkh ", null);
+        note.setImportance(Math.abs(new Random().nextInt()%3));
+        return note;
     }
 
     private static String makeDetails(int position) {

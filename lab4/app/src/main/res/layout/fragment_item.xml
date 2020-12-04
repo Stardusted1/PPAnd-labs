@@ -45,13 +45,14 @@
             android:id="@+id/note_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:text="date"
             android:textSize="10sp" />
 
         <ImageView
             android:id="@+id/note_importance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             app:srcCompat="@android:drawable/btn_star_big_on" />
     </LinearLayout>
 

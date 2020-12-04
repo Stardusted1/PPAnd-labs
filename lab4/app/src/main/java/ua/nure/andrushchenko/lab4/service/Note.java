@@ -1,11 +1,11 @@
 package ua.nure.andrushchenko.lab4.service;
 
 import android.graphics.Picture;
-import android.media.Image;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Note {
+public class Note implements Serializable {
     private final long id;
     private String title;
     private String desc;
@@ -13,7 +13,7 @@ public class Note {
     private Picture image;
     private int importance;
 
-    public Note(long id,String title, String desc, Picture image) {
+    public Note(long id, String title, String desc, Picture image) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -45,7 +45,7 @@ public class Note {
         this.date = date;
     }
 
-    public Picture getImage() {
+    public Picture getPicture() {
         return image;
     }
 

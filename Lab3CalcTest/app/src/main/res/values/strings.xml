@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lab3CalcTest</string>
+    <string name="app_label" translatable="false">Andrushchenko Labs</string>
+    <string name="switcher">eng</string>
+    <string name="calc_value">enter expression</string>
+    <string name="calc_result">Get result</string>
+    <string name="calc_activity">Andrushchenko Lab 3</string>
+    <string name="rgb_activity">RGB</string>
+    <string name="notes_activity">Andrushchenko Lab 3</string>
+    <string name="search_label">Search here</string>
+    <string name="search_hint">"Search here "</string>
+    <string name="notes_add_note">Add note</string>
+</resources>

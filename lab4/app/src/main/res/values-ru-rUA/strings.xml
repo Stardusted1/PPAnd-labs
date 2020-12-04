@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lab4</string>
+    <string name="button_delete">"Видалити "</string>
+    <string name="button_save">Зберегти</string>
+    <string name="note_title_hint">Титул примітки</string>
+</resources>
