@@ -1,19 +1,23 @@
 package ua.nure.andrushchenko.lab4.service;
 
-import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Note implements Serializable {
     private final long id;
     private String title;
     private String desc;
     private Date date;
-    private Picture image;
+    private Drawable image;
     private int importance;
 
-    public Note(long id, String title, String desc, Picture image) {
+    public Note(long id, String title, String desc, Drawable image) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -45,11 +49,11 @@ public class Note implements Serializable {
         this.date = date;
     }
 
-    public Picture getPicture() {
+    public Drawable getPicture() {
         return image;
     }
 
-    public void setImage(Picture image) {
+    public void setImage(Drawable image) {
         this.image = image;
     }
 
@@ -63,5 +67,19 @@ public class Note implements Serializable {
 
     public long getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return id == note.id;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

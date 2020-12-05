@@ -8,7 +8,7 @@ import java.util.Random;
 
 import ua.nure.andrushchenko.lab4.service.Note;
 
-public class DummyContent {
+public class NotesManager {
     public static final List<Note> ITEMS = new ArrayList<Note>();
 
     public static final Map<Long, Note> ITEM_MAP = new HashMap<Long, Note>();
@@ -26,9 +26,22 @@ public class DummyContent {
         ITEM_MAP.put(item.getId(), item);
     }
 
+    public static void deleteItem(Note item) {
+        ITEMS.remove(item);
+        ITEM_MAP.remove(item.getId());
+    }
+
+    public static void replaceOrAddItem(Note old, Note current) {
+        ITEMS.remove(old);
+        ITEMS.add(current);
+
+        ITEM_MAP.remove(old.getId());
+        ITEM_MAP.put(current.getId() ,current);
+    }
+
     private static Note createDummyItem(String title) {
         Note note = new Note(ITEMS.size(), title, "sdjfksdjhfj hsf bskjfksd jksdj skdhf kjdshf kjhdsfk jsd kjsh kjsdh jshd jksdh jsdh kjsdhf shsjkdkfjhsdfjkhsdfkh ", null);
-        note.setImportance(Math.abs(new Random().nextInt()%3));
+        note.setImportance(Math.abs(new Random().nextInt() % 3));
         return note;
     }
 

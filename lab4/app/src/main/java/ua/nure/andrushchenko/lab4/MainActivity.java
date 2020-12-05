@@ -7,17 +7,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import ua.nure.andrushchenko.lab4.service.Note;
+import static ua.nure.andrushchenko.lab4.list.ItemFragment.list;
+import static ua.nure.andrushchenko.lab4.list.ItemFragment.adapter;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
     }
 
@@ -41,5 +43,12 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        adapter.notifyDataSetChanged();
+//        list.invalidate();
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
