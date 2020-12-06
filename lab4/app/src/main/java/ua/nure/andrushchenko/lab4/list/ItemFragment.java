@@ -24,6 +24,7 @@ public class ItemFragment extends Fragment {
 	public static MyItemRecyclerViewAdapter adapter;
 	public static RecyclerView list;
 
+
 	public ItemFragment() {
 	}
 
@@ -68,7 +69,7 @@ public class ItemFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-		adapter = new MyItemRecyclerViewAdapter(NotesManager.ITEMS, getContext(), getActivity());
+		adapter = new MyItemRecyclerViewAdapter(NotesManager.getITEMS(), getContext(), getActivity());
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;

@@ -12,13 +12,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import ua.nure.andrushchenko.lab4.MainActivity;
-
 public class FileAPI implements IO_API {
 	@Override
-	public boolean write(Object data) {
+	public boolean write(Object data, Context context) {
 		try {
-			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.context.openFileOutput("config.txt", Context.MODE_PRIVATE));
+			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
 			outputStreamWriter.write(new Gson().toJson(data));
 			outputStreamWriter.close();
 			return true;
@@ -29,11 +27,11 @@ public class FileAPI implements IO_API {
 	}
 
 	@Override
-	public Object read() {
+	public Object read(Context context) {
 		String ret = "";
 
 		try {
-			InputStream inputStream = MainActivity.context.openFileInput("config.txt");
+			InputStream inputStream = context.openFileInput("config.txt");
 
 			if (inputStream != null) {
 				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

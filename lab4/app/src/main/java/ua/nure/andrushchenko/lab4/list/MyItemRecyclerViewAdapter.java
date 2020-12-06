@@ -32,13 +32,13 @@ import ua.nure.andrushchenko.lab4.service.NotesManager;
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> implements Filterable {
 
 	private final Activity activity;
-	private final List<Note> mValues;
+	public static List<Note> mainValues;
 
-	public MyItemRecyclerViewAdapter(List<Note> items, Context context, Activity activity) {
-		mValues = items;
+    public MyItemRecyclerViewAdapter(List<Note> items, Context context, Activity activity) {
+		mainValues = items;
 		this.activity = activity;
 
-	}
+    }
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
@@ -64,22 +64,22 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 	@RequiresApi(api = Build.VERSION_CODES.P)
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, int position) {
-		holder.mItem = mValues.get(position);
-		holder.note_id.setText(String.valueOf(mValues.get(position).getId()));
-		holder.note_title.setText(mValues.get(position).getTitle());
-		holder.note_desc.setText(mValues.get(position).getDesc());
-		if (mValues.get(position).getPicture() != null) {
-			holder.note_image.setImageDrawable((mValues.get(position).getPicture()));
+		holder.mItem = mainValues.get(position);
+		holder.note_id.setText(String.valueOf(mainValues.get(position).getId()));
+		holder.note_title.setText(mainValues.get(position).getTitle());
+		holder.note_desc.setText(mainValues.get(position).getDesc());
+		if (mainValues.get(position).getPicture() != null) {
+			holder.note_image.setImageDrawable((mainValues.get(position).getPicture()));
 		} else {
 			holder.note_image.setImageResource(R.drawable.ic_launcher_background);
 		}
-		holder.note_date.setText(DateFormat.format("MM-dd hh:mm:ss a", mValues.get(position).getDate()));
+		holder.note_date.setText(DateFormat.format("MM-dd hh:mm:ss a", mainValues.get(position).getDate()));
 
-		if (mValues.get(position).getImportance() == 0) {
+		if (mainValues.get(position).getImportance() == 0) {
 			holder.note_importance.setImageResource(R.drawable.level1);
-		} else if (mValues.get(position).getImportance() == 1) {
+		} else if (mainValues.get(position).getImportance() == 1) {
 			holder.note_importance.setImageResource(R.drawable.level2);
-		} else if (mValues.get(position).getImportance() == 2) {
+		} else if (mainValues.get(position).getImportance() == 2) {
 			holder.note_importance.setImageResource(R.drawable.level3);
 		}
 		// TODO: 06.12.2020 add on context set
@@ -88,7 +88,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
 	@Override
 	public int getItemCount() {
-		return mValues.size();
+		return mainValues.size();
 	}
 
 	@Override
@@ -136,8 +136,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
-				mValues.clear();
-				mValues.addAll((Collection<? extends Note>) results.values);
+				mainValues.clear();
+				mainValues.addAll((Collection<? extends Note>) results.values);
 				notifyDataSetChanged();
 			}
 		};

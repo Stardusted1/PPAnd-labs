@@ -13,6 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import ua.nure.andrushchenko.lab4.service.Note;
+import ua.nure.andrushchenko.lab4.service.NotesManager;
+
 import static ua.nure.andrushchenko.lab4.list.ItemFragment.adapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		context = getApplicationContext();
 		setContentView(R.layout.activity_main);
 		Toolbar myToolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(myToolbar);
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 				return false;
 			}
 		});
+		context = getBaseContext();
 
 	}
 
@@ -52,10 +55,16 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.menu_add_note:
+			case R.id.menu_add_note: {
 				Intent intent = new Intent(this.getApplicationContext(), NoteEditing.class);
 				startActivity(intent);
 				return true;
+			}
+			case R.id.menu_test_item: {
+				for (long i = 0; i < 25L; i++) {
+					NotesManager.addItem(new Note(i, String.format("Note %L", i), "ahahahsdhasdsadhasd asd asd hads sh ashd ", null));
+				}
+			}
 			default:
 				// If we got here, the user's action was not recognized.
 				// Invoke the superclass to handle it.
