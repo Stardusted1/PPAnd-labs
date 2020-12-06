@@ -82,4 +82,9 @@ public class Note implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+
+    public String toDescString() {
+        return "" + title + ' ' + desc + ' '  + date ;
+    }
 }

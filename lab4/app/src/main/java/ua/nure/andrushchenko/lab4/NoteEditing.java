@@ -1,5 +1,6 @@
 package ua.nure.andrushchenko.lab4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,13 +9,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import ua.nure.andrushchenko.lab4.dummy.NotesManager;
+import ua.nure.andrushchenko.lab4.service.NotesManager;
 import ua.nure.andrushchenko.lab4.service.Note;
 
 public class NoteEditing extends AppCompatActivity {
+    private static final int PICK_IMAGE = 101;
+
+
     Note currentNote;
     TextView title;
     SeekBar importance;
@@ -38,7 +43,7 @@ public class NoteEditing extends AppCompatActivity {
             desc.setText(currentNote.getDesc());
             importance.setProgress(currentNote.getImportance());
             picture.setImageDrawable(currentNote.getPicture());
-            Toast.makeText(getApplicationContext(), "withoutException", Toast.LENGTH_SHORT).show();
+
         } catch (Exception e) {
             currentNote = new Note(NotesManager.ITEMS.size(), title.getText().toString(), desc.getText().toString(), picture.getDrawable());
         }
@@ -61,7 +66,30 @@ public class NoteEditing extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == PICK_IMAGE) {
+            if (data != null) {
+//                Bitmap myBitmap = BitmapFactory.decodeFile(data.getDataString());
+//                picture.setImageBitmap(myBitmap);
+                picture.setImageURI(data.getData());
+                picture.invalidate();
+//                picture.invalidate();
+            }
+            Toast.makeText(getApplicationContext(), "withoutException", Toast.LENGTH_SHORT).show();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     public void onImagePick(View view) {
+        if (picture.getDrawable()==null) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        } else {
+            picture.setImageResource(0);
+        }
     }
 
     public void onSaveNote(View view) {
@@ -75,5 +103,4 @@ public class NoteEditing extends AppCompatActivity {
         NotesManager.deleteItem(currentNote);
         finish();
     }
-
 }

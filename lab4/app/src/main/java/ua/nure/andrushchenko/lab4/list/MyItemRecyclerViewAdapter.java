@@ -3,11 +3,12 @@ package ua.nure.andrushchenko.lab4.list;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,34 +23,37 @@ import java.util.List;
 
 import ua.nure.andrushchenko.lab4.NoteEditing;
 import ua.nure.andrushchenko.lab4.R;
-import ua.nure.andrushchenko.lab4.dummy.NotesManager;
 import ua.nure.andrushchenko.lab4.service.Note;
 
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final Context context;
     private final Activity activity;
-
-    //declare interface
-    private OnItemClicked onClick;
-
     private final List<Note> mValues;
+    private int position;
 
     public MyItemRecyclerViewAdapter(List<Note> items, Context context, Activity activity) {
         mValues = items;
-        this.context = context;
         this.activity = activity;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
         holder.mView.setOnClickListener((arg0) -> {
             Intent intent = new Intent(activity, NoteEditing.class);
-            Long noteId = Long.parseLong(((TextView)((LinearLayout) arg0).getChildAt(0)).getText().toString());
+            Long noteId = Long.parseLong(((TextView) ((LinearLayout) arg0).getChildAt(0)).getText().toString());
             intent.putExtra("CURRENT_ID", noteId);
             activity.startActivityForResult(intent, 100);
             Log.v("TAG", "CLICKED row number: " + arg0);
         });
+
         super.onBindViewHolder(holder, position, payloads);
     }
 
@@ -60,7 +64,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 .inflate(R.layout.fragment_item, parent, false);
         return new ViewHolder(view);
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -84,6 +87,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         } else if (mValues.get(position).getImportance() == 2) {
             holder.note_importance.setImageResource(R.drawable.level3);
         }
+        // TODO: 06.12.2020 add on context set
+
     }
 
     @Override
@@ -91,7 +96,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         public final View mView;
         public final TextView note_id;
         public final TextView note_title;
@@ -110,6 +115,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             note_image = view.findViewById(R.id.note_image);
             note_date = view.findViewById(R.id.note_date);
             note_importance = view.findViewById(R.id.note_importance);
+            view.setOnCreateContextMenuListener(this);
         }
 
         @NonNull
@@ -117,9 +123,13 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public String toString() {
             return super.toString() + " '" + note_desc.getText() + "'";
         }
-    }
 
-    public interface OnItemClicked {
-        void onItemClick(int position);
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            int noteId = Integer.parseInt(((TextView) ((LinearLayout) v).getChildAt(0)).getText().toString());
+            menu.add(noteId, v.getId(), 0, R.string.ctx_change);
+            menu.add(noteId, v.getId(), 1, R.string.ctx_delete);
+        }
+
     }
 }

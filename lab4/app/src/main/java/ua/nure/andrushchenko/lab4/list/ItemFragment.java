@@ -5,17 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ua.nure.andrushchenko.lab4.NoteEditing;
 import ua.nure.andrushchenko.lab4.R;
-import ua.nure.andrushchenko.lab4.dummy.NotesManager;
+import ua.nure.andrushchenko.lab4.service.NotesManager;
 
 public class ItemFragment extends Fragment {
 
@@ -35,9 +37,25 @@ public class ItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(getContext(), "onCreate", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        Long noteId = (long) item.getGroupId();
+        switch (item.getOrder()) {
+            case 0: {
+                Intent intent = new Intent(getActivity(), NoteEditing.class);
+                intent.putExtra("CURRENT_ID", noteId);
+                getActivity().startActivity(intent);
+            }
+            case 1: {
+                NotesManager.deleteItem(NotesManager.ITEM_MAP.get(noteId));
+                adapter.notifyDataSetChanged();
+            }
+        }
 
 
+        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -55,9 +73,9 @@ public class ItemFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            Toast.makeText(getContext(), "onCreateView", Toast.LENGTH_SHORT).show();
             Log.v("TAG", "CLICKED row number: ");
             recyclerView.setAdapter(adapter);
+            registerForContextMenu(recyclerView);
         }
         return view;
     }
