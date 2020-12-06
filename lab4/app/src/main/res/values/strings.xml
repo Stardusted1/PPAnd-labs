@@ -2,7 +2,7 @@
     <string name="app_name">Lab4</string>
     <string name="button_delete">Delete</string>
     <string name="button_save">Save</string>
-    <string name="note_title_hint" >Note title</string>
+    <string name="note_title_hint">Note title</string>
     <string name="menu_add_note">Add Note</string>
     <string name="ctx_change">change note</string>
     <string name="ctx_delete">delete note</string>

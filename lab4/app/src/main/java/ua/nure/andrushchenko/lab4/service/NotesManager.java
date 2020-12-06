@@ -12,40 +12,49 @@ import ua.nure.andrushchenko.lab4.api.IO_API;
 
 public class NotesManager {
 
-    private static final IO_API api;
-    public static List<Note> ITEMS;
-    public static Map<Long, Note> ITEM_MAP = new HashMap<Long, Note>();
+	private static final IO_API api;
 
-    static {
-        api = new DummyAPI();
-        HashMap<Long, Note> notes = (HashMap<Long, Note>) api.read();
-        if (notes != null) {
-            ITEM_MAP = notes;
-            ITEMS = new ArrayList<>(ITEM_MAP.values());
-        } else {
-            ITEM_MAP = new HashMap<>();
-            ITEMS = new ArrayList<>();
-        }
-    }
+	public static List<Note> getITEMS() {
+		return new ArrayList<>(ITEMS);
+	}
 
-    private static void addItem(Note item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.getId(), item);
+	public static List<Note> ITEMS;
+	private static Map<Long, Note> ITEM_MAP = new HashMap<Long, Note>();
 
-        new Gson().toJson(ITEM_MAP);
-    }
+	static {
+		api = new DummyAPI();
+		HashMap<Long, Note> notes = (HashMap<Long, Note>) api.read();
+		if (notes != null) {
+			ITEM_MAP = notes;
+			ITEMS = new ArrayList<>(ITEM_MAP.values());
+		} else {
+			ITEM_MAP = new HashMap<>();
+			ITEMS = new ArrayList<>();
+		}
+	}
 
-    public static void deleteItem(Note item) {
-        ITEMS.remove(item);
-        ITEM_MAP.remove(item.getId());
-    }
+	private static void addItem(Note item) {
+		ITEMS.add(item);
+		ITEM_MAP.put(item.getId(), item);
 
-    public static void replaceOrAddItem(Note old, Note current) {
-        ITEMS.remove(old);
-        ITEMS.add(current);
+		new Gson().toJson(ITEM_MAP);
+	}
 
-        ITEM_MAP.remove(old.getId());
-        ITEM_MAP.put(current.getId(), current);
-    }
+	public static void deleteItem(Note item) {
+		ITEMS.remove(item);
+		ITEM_MAP.remove(item.getId());
+	}
+
+	public static void replaceOrAddItem(Note old, Note current) {
+		ITEMS.remove(old);
+		ITEMS.add(current);
+
+		ITEM_MAP.remove(old.getId());
+		ITEM_MAP.put(current.getId(), current);
+	}
+
+	public static Map<Long, Note> getItemMap() {
+		return new HashMap<Long, Note>(ITEM_MAP);
+	}
 
 }
