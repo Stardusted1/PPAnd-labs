@@ -1,10 +1,12 @@
 package ua.nure.andrushchenko.lab4.service;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -14,14 +16,16 @@ public class Note implements Serializable {
 	private String title;
 	private String desc;
 	private Date date;
-	private Drawable image;
+	private byte[] image;
 	private int importance;
 
-	public Note(long id, String title, String desc, Drawable image) {
+	public Note(long id, String title, String desc, Bitmap image) {
 		this.id = id;
 		this.title = title;
 		this.desc = desc;
-		this.image = image;
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+		this.image = stream.toByteArray();
 		this.date = new Date();
 	}
 
@@ -51,12 +55,16 @@ public class Note implements Serializable {
 		this.date = date;
 	}
 
-	public Drawable getPicture() {
-		return image;
+	public Bitmap getImage() {
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inMutable = true;
+		return BitmapFactory.decodeByteArray(image, 0, image.length, options);
 	}
 
-	public void setImage(Drawable image) {
-		this.image = image;
+	public void setImage(Bitmap image) {
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+		this.image = stream.toByteArray();
 		this.date = new Date();
 	}
 

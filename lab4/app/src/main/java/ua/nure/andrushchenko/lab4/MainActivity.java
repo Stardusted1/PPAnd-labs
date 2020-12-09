@@ -1,6 +1,5 @@
 package ua.nure.andrushchenko.lab4;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,8 +18,6 @@ import ua.nure.andrushchenko.lab4.service.NotesManager;
 import static ua.nure.andrushchenko.lab4.list.ItemFragment.adapter;
 
 public class MainActivity extends AppCompatActivity {
-	public static Context context;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 				return false;
 			}
 		});
-		context = getBaseContext();
 
 	}
 

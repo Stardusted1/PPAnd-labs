@@ -68,8 +68,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 		holder.note_id.setText(String.valueOf(mainValues.get(position).getId()));
 		holder.note_title.setText(mainValues.get(position).getTitle());
 		holder.note_desc.setText(mainValues.get(position).getDesc());
-		if (mainValues.get(position).getPicture() != null) {
-			holder.note_image.setImageDrawable((mainValues.get(position).getPicture()));
+		if (mainValues.get(position).getImage() != null) {
+			holder.note_image.setImageBitmap((mainValues.get(position).getImage()));
 		} else {
 			holder.note_image.setImageResource(R.drawable.ic_launcher_background);
 		}
