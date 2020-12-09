@@ -35,18 +35,20 @@ public class SQLLiteAPI implements IO_API {
 	@Override
 	public void write(Map<Long, Note> data, Context context) {
 		SQLiteDatabase db = context.openOrCreateDatabase("notes.db", Context.MODE_PRIVATE, null);
-		if (tableExists(db, "Notes")) {
-			db.execSQL("DROP TABLE 'Notes'");
+		if (!tableExists(db, "Notes")) {
+			db.execSQL("CREATE TABLE 'Notes' (\n" +
+					"\t id integer PRIMARY KEY AUTOINCREMENT,\n" +
+					"\t data blob\n" +
+					");\n");
 		}
-		db.execSQL("CREATE TABLE 'Notes' (\n" +
-				"\t id integer PRIMARY KEY AUTOINCREMENT,\n" +
-				"\t data blob\n" +
-				");\n");
+
 
 		for (Note note : data.values()) {
 			try {
-				db.execSQL("insert into 'Notes' values(?, ?)", new Object[]{note.getId(), note});
+				db.execSQL("insert into 'Notes'(data) values( ?)", new Object[]{serialize(note)});
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -55,15 +57,15 @@ public class SQLLiteAPI implements IO_API {
 
 	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	@Override
-	public Object read(Context context)  {
+	public Object read(Context context) {
 		SQLiteDatabase db = context.openOrCreateDatabase("notes.db", Context.MODE_PRIVATE, null);
 		if (!tableExists(db, "Notes")) {
 			return new ArrayMap<>();
 		}
-		ArrayMap<Integer, Note> res = new ArrayMap<>();
+		ArrayMap<Long, Note> res = new ArrayMap<>();
 		Cursor query = db.rawQuery("SELECT * FROM 'Notes';", null);
-		while (query.moveToNext()){
-			int id = query.getInt(0);
+		while (query.moveToNext()) {
+			long id = query.getLong(0);
 			byte[] noteBlob = query.getBlob(1);
 			try {
 				res.put(id, (Note) deserialize(noteBlob));

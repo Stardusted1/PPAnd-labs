@@ -99,7 +99,7 @@ public class NoteEditing extends AppCompatActivity {
 
 	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	public void onSaveNote(View view) {
-		Note newNote = new Note(NotesManager.getITEMS().size(),
+		Note newNote = new Note(NotesManager.getItemMap().size(),
 				title.getText().toString(),
 				desc.getText().toString(),
 				((BitmapDrawable) picture.getDrawable()).getBitmap());
