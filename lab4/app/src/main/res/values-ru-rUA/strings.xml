@@ -4,7 +4,4 @@
     <string name="button_delete">"Видалити "</string>
     <string name="button_save">Зберегти</string>
     <string name="note_title_hint">Титул примітки</string>
-    <string name="menu_add_note">Додати нотаток</string>
-    <string name="ctx_change">"Змінити "</string>
-    <string name="ctx_delete">"Видалити "</string>
 </resources>

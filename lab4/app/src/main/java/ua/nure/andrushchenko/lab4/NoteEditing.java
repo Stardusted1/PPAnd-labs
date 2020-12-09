@@ -1,6 +1,10 @@
 package ua.nure.andrushchenko.lab4;
 
+<<<<<<< Updated upstream
+=======
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,14 +14,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+>>>>>>> Stashed changes
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import ua.nure.andrushchenko.lab4.list.ItemFragment;
-import ua.nure.andrushchenko.lab4.service.Note;
-import ua.nure.andrushchenko.lab4.service.NotesManager;
+import android.os.Bundle;
 
 public class NoteEditing extends AppCompatActivity {
+<<<<<<< Updated upstream
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_note_editing);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(myToolbar);
+    }
+=======
 	private static final int PICK_IMAGE = 101;
 
 
@@ -27,6 +41,7 @@ public class NoteEditing extends AppCompatActivity {
 	EditText desc;
 	ImageView picture;
 
+	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,10 +58,10 @@ public class NoteEditing extends AppCompatActivity {
 			title.setText(currentNote.getTitle());
 			desc.setText(currentNote.getDesc());
 			importance.setProgress(currentNote.getImportance());
-			picture.setImageDrawable(currentNote.getPicture());
+			picture.setImageBitmap(currentNote.getImage());
 
 		} catch (Exception e) {
-			currentNote = new Note(NotesManager.getITEMS().size(), title.getText().toString(), desc.getText().toString(), picture.getDrawable());
+			currentNote = new Note(NotesManager.getITEMS().size(), title.getText().toString(), desc.getText().toString(), ((BitmapDrawable) picture.getDrawable()).getBitmap());
 		}
 		Toolbar myToolbar = findViewById(R.id.toolbar2);
 		setSupportActionBar(myToolbar);
@@ -90,17 +105,20 @@ public class NoteEditing extends AppCompatActivity {
 		}
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	public void onSaveNote(View view) {
-		Note newNote = new Note(NotesManager.getITEMS().size(), title.getText().toString(), desc.getText().toString(), picture.getDrawable());
+		Note newNote = new Note(NotesManager.getITEMS().size(), title.getText().toString(), desc.getText().toString(), ((BitmapDrawable) picture.getDrawable()).getBitmap());
 		newNote.setImportance(importance.getProgress());
 		NotesManager.replaceOrAddItem(currentNote, newNote);
 		ItemFragment.adapter.notifyDataSetChanged();
 		finish();
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	public void onDeleteNote(View view) {
 		NotesManager.deleteItem(currentNote);
 		ItemFragment.adapter.notifyDataSetChanged();
 		finish();
 	}
+>>>>>>> Stashed changes
 }
