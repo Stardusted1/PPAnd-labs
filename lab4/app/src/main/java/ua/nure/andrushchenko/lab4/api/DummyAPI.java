@@ -3,6 +3,7 @@ package ua.nure.andrushchenko.lab4.api;
 import android.content.Context;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import ua.nure.andrushchenko.lab4.service.Note;
@@ -11,12 +12,8 @@ public class DummyAPI implements IO_API {
 	private static final int COUNT = 25;
 
 	@Override
-	public boolean write(Object data, Context context) {
-		try {
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public void write(Map data, Context context) {
+
 	}
 
 	@Override

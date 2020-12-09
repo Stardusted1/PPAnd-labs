@@ -94,6 +94,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 	@Override
 	public Filter getFilter() {
 		return new Filter() {
+			@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				List<Note> temp = new ArrayList<>();

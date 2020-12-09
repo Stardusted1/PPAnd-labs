@@ -14,6 +14,7 @@ import ua.nure.andrushchenko.lab4.App;
 import ua.nure.andrushchenko.lab4.api.DummyAPI;
 import ua.nure.andrushchenko.lab4.api.FileAPI;
 import ua.nure.andrushchenko.lab4.api.IO_API;
+import ua.nure.andrushchenko.lab4.api.SQLLiteAPI;
 import ua.nure.andrushchenko.lab4.list.MyItemRecyclerViewAdapter;
 
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -24,7 +25,7 @@ public class NotesManager {
 	private static Map<Long, Note> ITEM_MAP = new HashMap<Long, Note>();
 
 	static {
-		api = new FileAPI();
+		api = new SQLLiteAPI();
 		Map<Long, Note> notes = (ArrayMap<Long, Note>) api.read(App.getAppContext());
 		if (notes != null) {
 			ITEM_MAP = notes;

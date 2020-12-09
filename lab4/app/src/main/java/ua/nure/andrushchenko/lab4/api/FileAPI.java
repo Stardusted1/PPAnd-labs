@@ -26,7 +26,7 @@ public class FileAPI implements IO_API {
 	private static final String FILE_NAME = "notes.dat";
 
 	@Override
-	public boolean write(Object data, Context context) {
+	public void write(Map data, Context context) {
 //		Map<Long, NoteSerializable> resMap = new ArrayMap<>();
 //		for (Note note : ((Map<Long, Note>) data).values()) {
 //			resMap.put(note.getId(), new NoteSerializable(note));
@@ -36,10 +36,8 @@ public class FileAPI implements IO_API {
 			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE));
 			outputStreamWriter.write(s);
 			outputStreamWriter.close();
-			return true;
 		} catch (IOException e) {
 			Log.e("Exception", "File write failed: " + e.toString());
-			return false;
 		}
 	}
 
