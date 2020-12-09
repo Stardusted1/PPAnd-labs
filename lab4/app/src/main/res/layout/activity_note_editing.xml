@@ -28,10 +28,12 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
         <ImageView
-            android:id="@+id/note_image_picker"
+            android:id="@+id/form_note_image_picker"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
+            android:longClickable="false"
+            android:onClick="onImagePick"
             app:srcCompat="@drawable/image" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +43,7 @@
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/note_title_input"
+                android:id="@+id/form_title_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/note_title_hint"
@@ -49,7 +51,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
-            android:id="@+id/note_desc_input"
+            android:id="@+id/form_desc_input"
             android:layout_width="402dp"
             android:layout_height="411dp"
             android:layout_weight="1"
@@ -58,13 +60,13 @@
             android:inputType="textMultiLine" />
 
         <SeekBar
-            android:id="@+id/note_importance_input"
+            android:id="@+id/form_note_imp_input"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:max="2"
-            android:progress="1" />
+            android:progress="0" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,26 +74,30 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/form_note_delete"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onDeleteNote"
                 android:text="@string/button_delete"
                 android:textColor="#F44336"
+                android:textSize="14sp"
                 app:icon="@android:drawable/ic_menu_delete"
                 app:iconTint="#F44336"
                 app:rippleColor="#E57373"
                 app:strokeColor="#F44336" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/form_note_save"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onSaveNote"
                 android:text="@string/button_save"
                 android:textColor="#4CAF50"
+                android:textSize="14sp"
                 app:icon="@android:drawable/ic_menu_save"
                 app:iconTint="#388E3C"
                 app:rippleColor="#81C784"
