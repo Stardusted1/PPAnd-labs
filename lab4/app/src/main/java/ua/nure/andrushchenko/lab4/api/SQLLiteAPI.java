@@ -35,14 +35,14 @@ public class SQLLiteAPI implements IO_API {
 	@Override
 	public void write(Map<Long, Note> data, Context context) {
 		SQLiteDatabase db = context.openOrCreateDatabase("notes.db", Context.MODE_PRIVATE, null);
-		if (!tableExists(db, "Notes")) {
-			db.execSQL("CREATE TABLE 'Notes' (\n" +
-					"\t id integer PRIMARY KEY AUTOINCREMENT,\n" +
-					"\t data blob\n" +
-					");\n");
+		if (tableExists(db, "Notes")) {
+			db.execSQL("DROP TABLE 'Notes' ;");
 		}
 
-
+		db.execSQL("CREATE TABLE 'Notes' (\n" +
+				"\t id integer PRIMARY KEY AUTOINCREMENT,\n" +
+				"\t data blob\n" +
+				");\n");
 		for (Note note : data.values()) {
 			try {
 				db.execSQL("insert into 'Notes'(data) values( ?)", new Object[]{serialize(note)});
@@ -68,7 +68,8 @@ public class SQLLiteAPI implements IO_API {
 			long id = query.getLong(0);
 			byte[] noteBlob = query.getBlob(1);
 			try {
-				res.put(id, (Note) deserialize(noteBlob));
+				Note note = (Note) deserialize(noteBlob);
+				res.put(note.getId(), note);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
