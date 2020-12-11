@@ -41,9 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
+            android:contentDescription="Image to show"
             android:longClickable="false"
             android:onClick="onImagePick"
-            app:srcCompat="@drawable/image" />
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
