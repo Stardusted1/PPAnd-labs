@@ -27,13 +27,11 @@ public class FileAPI implements IO_API {
 
 	@Override
 	public void write(Map data, Context context) {
-//		Map<Long, NoteSerializable> resMap = new ArrayMap<>();
-//		for (Note note : ((Map<Long, Note>) data).values()) {
-//			resMap.put(note.getId(), new NoteSerializable(note));
-//		}
+
 		String s = new Gson().toJson(data);
 		try {
-			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE));
+			OutputStreamWriter outputStreamWriter =
+					new OutputStreamWriter(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE));
 			outputStreamWriter.write(s);
 			outputStreamWriter.close();
 		} catch (IOException e) {

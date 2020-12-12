@@ -25,7 +25,7 @@ public class NotesManager {
 	private static Map<Long, Note> ITEM_MAP = new HashMap<Long, Note>();
 
 	static {
-		api = new SQLLiteAPI();
+		api = new FileAPI();
 		Map<Long, Note> notes = (ArrayMap<Long, Note>) api.read(App.getAppContext());
 		if (notes != null) {
 			ITEM_MAP = notes;

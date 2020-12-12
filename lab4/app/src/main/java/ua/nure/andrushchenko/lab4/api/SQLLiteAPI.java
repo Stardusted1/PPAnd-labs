@@ -81,7 +81,8 @@ public class SQLLiteAPI implements IO_API {
 		@Override
 		protected final Void doInBackground(Map<Long, Note>... maps) {
 
-			SQLiteDatabase db = App.getAppContext().openOrCreateDatabase("notes.db", Context.MODE_PRIVATE, null);
+			SQLiteDatabase db = App.getAppContext()
+					.openOrCreateDatabase("notes.db", Context.MODE_PRIVATE, null);
 			if (tableExists(db, "Notes")) {
 				db.execSQL("DROP TABLE 'Notes' ;");
 			}
@@ -92,7 +93,8 @@ public class SQLLiteAPI implements IO_API {
 					");\n");
 			for (Note note : maps[0].values()) {
 				try {
-					db.execSQL("insert into 'Notes'(data) values( ?)", new Object[]{serialize(note)});
+					db.execSQL("insert into 'Notes'(data)" +
+							" values( ?)", new Object[]{serialize(note)});
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -112,7 +114,10 @@ public class SQLLiteAPI implements IO_API {
 		@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 		@Override
 		protected Object doInBackground(Void... voids) {
-			SQLiteDatabase db = App.getAppContext().openOrCreateDatabase("notes.db", Context.MODE_PRIVATE, null);
+			SQLiteDatabase db =
+					App.getAppContext()
+							.openOrCreateDatabase("notes.db",
+									Context.MODE_PRIVATE, null);
 			if (!tableExists(db, "Notes")) {
 				return new ArrayMap<>();
 			}
